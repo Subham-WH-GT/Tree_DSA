@@ -1,0 +1,63 @@
+
+# ompleteness Of A Binary Tree . . .
+
+
+  ** BFS **
+
+
+  bool isCompleteTree(TreeNode* root) {
+        
+        queue<TreeNode*>q;
+        bool past=false;
+        q.push(root);
+        
+        while(!q.empty())
+        {
+            auto temp=q.front();
+            q.pop();
+            
+            if(temp==NULL) past=true;
+            
+            else{
+                 if(temp!=NULL and past) return false;
+                  q.push(temp->left);
+            q.push(temp->right);
+                
+            }
+            
+        }
+        
+        return true;
+        
+    } 
+
+
+
+  **DFS**
+
+
+    int countNodes(TreeNode* root){
+
+    if(!root) return 0;
+        return 1+countNodes(root->left)+countNodes(root->right);
+    }
+    
+    bool dfs(TreeNode* root, int i, int tn){
+        
+        if(!root) return true;
+        
+        if(i>tn) return false;
+        
+        return dfs(root->left,2*i,tn) and dfs(root->right,2*i+1,tn);
+    }
+    
+    
+    
+    bool isCompleteTree(TreeNode* root) {
+        
+        int TotalNodes=countNodes(root);
+        
+        int i=1;
+        return dfs(root,i,TotalNodes);
+        
+    }
