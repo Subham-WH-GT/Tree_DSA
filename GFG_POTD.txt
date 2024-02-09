@@ -1,0 +1,31 @@
+
+#  Check for Children Sum Property in a Binary Tree . . . 
+
+
+class Solution{
+    public:
+    //Function to check whether all nodes of a tree have the value 
+    //equal to the sum of their child nodes.
+    
+    bool solve(Node *root){
+        
+        if(!root) return true;
+        
+        if((root->left and root->right) and (root->data != (root->left->data + root->right->data))) return false;
+        
+        if((root->left and !root->right) and (root->data != root->left->data)) return false;
+        
+        if((root->right and !root->left) and (root->data != root->right->data)) return false;
+        
+        if(!root->right and !root->left) return true;
+        
+        return (solve(root->left) and solve(root->right));
+        
+    }
+    
+    int isSumProperty(Node *root)
+    {
+     // Add your code here
+     return solve(root);
+    }
+};
