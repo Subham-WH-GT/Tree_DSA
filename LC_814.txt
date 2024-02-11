@@ -1,0 +1,33 @@
+# Binary Tree pruning . . .
+
+   ** Brute Force **
+
+
+  bool onePresent(TreeNode* root){
+        
+        if(!root) return false;
+        
+        if(root->val==1) return true;
+        
+        return onePresent(root->left) or onePresent(root->right);
+    }
+    
+    
+    TreeNode* pruneTree(TreeNode* root) {
+        
+        if(!root) return NULL;
+        
+        if(!onePresent(root->left)) root->left=NULL;
+        
+        if(!onePresent(root->right)) root->right=NULL;
+        
+        pruneTree(root->left);
+        pruneTree(root->right);
+        
+        if(root->left == NULL and root->right ==NULL and root->val==0){
+            return NULL;
+        }
+        
+        return root;
+        
+    }
