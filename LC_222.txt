@@ -1,0 +1,48 @@
+ 
+    int getLeft(TreeNode* root){
+
+    TreeNode* temp=root;
+        int lcount=0;
+        while(temp){
+
+        temp=temp->left;
+            lcount++;
+        }
+        
+        return lcount;
+        
+    
+    }
+    
+    
+    int getRight(TreeNode* root){
+
+    TreeNode* temp=root;
+        int rcount=0;
+        while(temp){
+
+        temp=temp->right;
+            rcount++;
+        }
+        
+        return rcount;
+        
+    
+    }
+    
+    int countNodes(TreeNode* root) {
+        
+        if(!root) return 0;
+        
+        int lh=getLeft(root);
+        int rh=getRight(root);
+        
+        if(lh==rh){
+
+        return (pow(2,lh)-1); 
+        }
+        
+        return countNodes(root->left)+countNodes(root->right)+1;
+        
+        
+    }
