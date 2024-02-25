@@ -1,0 +1,23 @@
+# Maximum Path Sum . . .
+
+ int maxSum;
+
+    int solve(TreeNode* root){
+        if(!root) return 0;
+
+        int l=solve(root->left);
+        int r=solve(root->right);
+
+        int only_root_accha=root->val;
+        int koi_ekk_accha=max(l,r)+root->val;
+        int niche_hi_sab_accha=l+root->val+r;
+
+        maxSum=max({maxSum,only_root_accha,koi_ekk_accha,niche_hi_sab_accha});
+        return max(only_root_accha,koi_ekk_accha);
+    }
+
+    int maxPathSum(TreeNode* root) {
+        maxSum=INT_MIN;
+        solve(root);
+        return maxSum;
+    }
